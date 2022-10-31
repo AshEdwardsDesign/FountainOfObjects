@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FountainOfObjects
 {
-    internal class Maelstrom
+    internal class Maelstrom : Entity
     {
     }
 }

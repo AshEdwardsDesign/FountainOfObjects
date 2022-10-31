@@ -14,7 +14,7 @@ namespace FountainOfObjects
         public bool hasNearbyThreat = false;
         public bool isPlayerPresent = false;
 
-        private Entity? entity;
+        public Entity? entity { get; private set; }
 
         public void DisplayRoom()
         {
@@ -23,7 +23,9 @@ namespace FountainOfObjects
             if (visited)
             {
                 Console.BackgroundColor = ConsoleColor.DarkGray;
-            } else if (hasNearbyThreat)
+            }
+
+            if (hasNearbyThreat)
             {
                 Console.BackgroundColor = ConsoleColor.DarkYellow;
             }
@@ -34,8 +36,36 @@ namespace FountainOfObjects
                 Console.BackgroundColor = ConsoleColor.DarkBlue;
             }
 
+            if (entity is CavernEntrance && visited)
+            {
+                displayChar = 'E';
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                if (isPlayerPresent)
+                {
+                    displayChar = 'P';
+                }
+            }
+
+            if (entity is Fountain && visited)
+            {
+                displayChar = 'F';
+                Console.BackgroundColor = ConsoleColor.DarkGreen;
+                if (isPlayerPresent)
+                {
+                    displayChar = 'P';
+                }
+            }
+
             Console.Write(displayChar);
             Console.ResetColor();
+        }
+
+        public void AddEntity(Entity entity)
+        {
+            if (this.entity == null)
+            {
+                this.entity = entity;
+            }
         }
     }
 }

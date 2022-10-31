@@ -28,6 +28,11 @@ namespace FountainOfObjects.GameLogic
                 return Player.Move(CardinalDirection.West);
             }
 
+            if (input.Contains("enable"))
+            {
+                return Player.EnableFountain();
+            }
+
             return false;
         }
     }

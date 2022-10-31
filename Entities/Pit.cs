@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FountainOfObjects
 {
-    internal class Pit
+    internal class Pit : Entity
     {
     }
 }

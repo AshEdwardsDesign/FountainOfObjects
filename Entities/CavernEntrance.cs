@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FountainOfObjects
+namespace FountainOfObjects.Entities
 {
-    internal class Amarok : Entity
+    internal class CavernEntrance : Entity
     {
     }
 }
