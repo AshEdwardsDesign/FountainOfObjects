@@ -7,6 +7,7 @@ namespace FountainOfObjects.Entities
         public static Coordinate PlayerPosition { get; private set; } = new Coordinate{ X = 0, Y = 0 };
         public static bool isAlive { get; private set; } = true;
         public static bool hasEscaped { get; private set; } = false;
+        public static bool hasActivatedFountain { get; private set; } = false;
 
         public static bool Move(CardinalDirection dir)
         {
@@ -37,13 +38,15 @@ namespace FountainOfObjects.Entities
                 Cavern.UpdatePlayerPosition(currentPosition, destination);
                 if(!checkIfAlive())
                 {
-                    Player.isAlive = false;
-                    Console.ForegroundColor = ConsoleColor.Red;
-                    Console.WriteLine("You have walked into a trap and died.");
-                    Console.WriteLine("Press enter to try again.");
-                    Console.ResetColor();
-                    Console.ReadLine();
+                    isAlive = false;
+                    return false;
                 }
+
+                if (Cavern.GetRoomAtCoordinate(PlayerPosition).entity is CavernEntrance && hasActivatedFountain)
+                {
+                    hasEscaped = true;
+                }
+
                 return true;
             }
 
@@ -64,6 +67,7 @@ namespace FountainOfObjects.Entities
         {
             isAlive = true;
             hasEscaped = false;
+            hasActivatedFountain = false;
             PlayerPosition = new Coordinate { X = 0, Y = 0 };
         }
 
@@ -82,10 +86,11 @@ namespace FountainOfObjects.Entities
                 } else
                 {
                     Console.ForegroundColor = ConsoleColor.Green;
-                    Console.WriteLine("You must be at the fountain to activate it.");
+                    Console.WriteLine("You have turned on the Fountain Of Objects!");
                     Console.ResetColor();
                     Console.ReadLine();
                     fountain.EnableFountain();
+                    hasActivatedFountain = true;
                     return true;
                 }
             }

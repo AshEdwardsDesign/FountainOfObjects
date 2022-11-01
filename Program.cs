@@ -36,6 +36,26 @@ void PlayGame()
 
         UserInput.ParseInput(input);
     }
+
+    // Player has died
+    if (!Player.isAlive)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("You have walked into a trap and died.");
+        Console.WriteLine("Press enter to try again.");
+        Console.ResetColor();
+        Console.ReadLine();
+    }
+
+    // Player has escaped
+    if (Player.hasEscaped)
+    {
+        Console.ForegroundColor = ConsoleColor.Green;
+        Console.WriteLine("The Fountain of Objects has been reactivated and you have escaped with your life!");
+        Console.WriteLine("Press enter to play again.");
+        Console.ResetColor();
+        Console.ReadLine();
+    }
 }
 
 Console.ReadLine();

@@ -88,7 +88,7 @@ namespace FountainOfObjects
 
             foreach (Room room in adjacents)
             {
-                if (room.entity is not null)
+                if (room.entity is not null && room.entity is not CavernEntrance && room.entity is not Fountain)
                 {
                     threats.Add(room.entity);
                 }
