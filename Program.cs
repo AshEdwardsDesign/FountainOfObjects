@@ -4,6 +4,8 @@ using FountainOfObjects.GameLogic;
 
 //Console.WriteLine("Welcome to the Fountain Of Objects!");
 
+DateTime gameStart;
+
 while (true)
 {
     StartGame();
@@ -18,6 +20,8 @@ void StartGame()
 
 void PlayGame()
 {
+    gameStart = DateTime.Now;
+
     while (Player.isAlive && !Player.hasEscaped)
     {
         Console.Clear();
@@ -42,6 +46,7 @@ void PlayGame()
     {
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("You have walked into a trap and died.");
+        DisplayTimeTaken();
         Console.WriteLine("Press enter to try again.");
         Console.ResetColor();
         Console.ReadLine();
@@ -52,13 +57,12 @@ void PlayGame()
     {
         Console.ForegroundColor = ConsoleColor.Green;
         Console.WriteLine("The Fountain of Objects has been reactivated and you have escaped with your life!");
+        DisplayTimeTaken();
         Console.WriteLine("Press enter to play again.");
         Console.ResetColor();
         Console.ReadLine();
     }
 }
-
-Console.ReadLine();
 
 void DisplayTitle()
 {
@@ -69,4 +73,13 @@ void DisplayTitle()
     Console.WriteLine(new String('|', title.Length));
     Console.ResetColor();
     Console.WriteLine();
+}
+
+void DisplayTimeTaken()
+{
+    TimeSpan timeTaken = DateTime.Now - gameStart;
+
+    Console.ForegroundColor = ConsoleColor.Yellow;
+    Console.WriteLine($"You were in the cavern for: {timeTaken.Hours} hours, {timeTaken.Minutes} minutes and {timeTaken.Seconds} seconds.");
+    Console.ResetColor();
 }
